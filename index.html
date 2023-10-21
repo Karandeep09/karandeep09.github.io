@@ -79,8 +79,8 @@ TECHNOLOGIES
   const currentMarginLeft = parseFloat(getComputedStyle(border).marginLeft);
   const currentMarginTop = parseFloat(getComputedStyle(border).marginTop);
 
-  movingText.style.marginLeft = currentMarginLeft + Math.random() * 2  + 'px';
-  movingText.style.marginTop = currentMarginTop + Math.random() * 2  + 'px';
+  movingText.style.marginLeft = currentMarginLeft + Math.random() * 5  + 'px';
+  movingText.style.marginTop = currentMarginTop + Math.random() * 5  + 'px';
 
   requestAnimationFrame(animate);
 }
