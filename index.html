@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Karandeep's Space</title>
+  <style>
+    #text {
+      position: absolute;
+      top: 0%;
+      left: 5%;
+      color: #00ffdd;
+      font-family: Arial, Helvetica, sans-serif; 
+      font-size: 32px; 
+    }
+    #movingText {
+      position: relative;
+      top: 0%;
+      left: 5%;
+      font-family: Arial, Helvetica, sans-serif; 
+      font-size: 32px; 
+      color: #ffffff;
+    }
+    #container {
+      position: relative;
+      top: 50%;
+      left: 50%;
+      overflow: scroll;
+      height: 450px;
+      width: 800px;
+      transform: translate(-50%, -50%);
+      background-color: black;
+      z-index: -1;
+    }
+    #upper {
+      position: absolute;
+      height: 450px;
+      padding: 5px;
+      width: 800px;
+      top: 50%;
+      left:50%;
+      transform: translate(-50%, -50%);
+      z-index: -9;
+      background-color: #ffaf00;
+    }
+    /* .movable-text:hover {
+      transform: translate(2px, 2px);
+    } */
+  </style>
+</head>
+<body>
+<div id="upper">
+  <div id="container">
+  <div id = "text">
+  karandeep@ubuntu:~ $ <span style="color: white;"> cat /home/karandeep/skills </span>
+  </div>
+  <div id="movingText">
+  <pre>
+  
+SKILLS
+PROGRAMMING
+•Java• C++ • Haskell
+• JavaScript• HTML• CSS
+• Spring Boot• Node.js • MySQL
+• JUnit • Cucumber• Katalon Studio
+Familiar:
+• AWS s3 • Python • React • Angular
+TECHNOLOGIES
+•Git•Docker•RESTful APIs
+•LINUX •Automation Testing
+•Test Driven Development
+</pre>
+</div>
+ </div>
+</div>
+  <script>
+    const border = document.getElementById('upper');
+    const movingText = document.getElementById('movingText'); 
+    animate();
+    function animate() {
+  const currentMarginLeft = parseFloat(getComputedStyle(border).marginLeft);
+  const currentMarginTop = parseFloat(getComputedStyle(border).marginTop);
+
+  movingText.style.marginLeft = currentMarginLeft + Math.random() * 2  + 'px';
+  movingText.style.marginTop = currentMarginTop + Math.random() * 2  + 'px';
+
+  requestAnimationFrame(animate);
+}
+     document.addEventListener('mousedown', (event) => {
+      const x = event.clientX;
+      const y = event.clientY;
+
+      border.style.left = x + 'px';
+      border.style.top = y + 'px';
+    });
+    var locked, lockedX, lockedY;
+movingText.addEventListener('mouseover', function (){
+    locked = true;
+    lockedX = window.scrollX;
+    lockedY = window.scrollY;
+}, false);
+movingText.addEventListener('mouseout', function (){
+    locked = false;
+}, false);
+
+window.addEventListener('scroll', function (e){
+    if(locked === true){
+        window.scrollTo(lockedX, lockedY);
+        e.preventDefault();
+    }
+}, false);
+  </script>
+</body>
+</html>
