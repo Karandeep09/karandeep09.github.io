@@ -1,112 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Karandeep's Space</title>
-  <style>
-    #text {
-      position: absolute;
-      top: 0%;
-      left: 5%;
-      color: #00ffdd;
-      font-family: Arial, Helvetica, sans-serif; 
-      font-size: 28px; 
-    }
-    #movingText {
-      position: relative;
-      top: 0%;
-      left: 5%;
-      font-family: Arial, Helvetica, sans-serif; 
-      font-size: 28px; 
-      color: #ffffff;
-    }
-    #container {
-      position: relative;
-      top: 50%;
-      left: 50%;
-      overflow: scroll;
-      height: 450px;
-      width: 800px;
-      transform: translate(-50%, -50%);
-      background-color: black;
-      z-index: -1;
-    }
-    #upper {
-      position: absolute;
-      height: 450px;
-      padding: 5px;
-      width: 800px;
-      top: 50%;
-      left:50%;
-      transform: translate(-50%, -50%);
-      z-index: -9;
-      background-color: #ffaf00;
-    }
-    /* .movable-text:hover {
-      transform: translate(2px, 2px);
-    } */
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karandeep's Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background: #007acc;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        #content {
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+            padding: 2rem;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 1rem;
+            overflow-x: auto;
+            border-radius: 8px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #333;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
-<div id="upper">
-  <div id="container">
-  <div id = "text">
-  karandeep@ubuntu:~ $ <span style="color: white;"> cat /home/karandeep/skills </span>
-  </div>
-  <div id="movingText">
-  <pre>
-  
-SKILLS
-PROGRAMMING
-•Java• C++ • Haskell
-• JavaScript• HTML• CSS
-• Spring Boot• Node.js • MySQL
-• JUnit • Cucumber• Katalon Studio
-Familiar:
-• AWS s3 • Python • React • Angular
-TECHNOLOGIES
-•Git•Docker•RESTful APIs
-•LINUX •Automation Testing
-•Test Driven Development
-</pre>
-</div>
- </div>
-</div>
-  <script>
-    const border = document.getElementById('upper');
-    const movingText = document.getElementById('movingText'); 
-    animate();
-    function animate() {
-  const currentMarginLeft = parseFloat(getComputedStyle(border).marginLeft);
-  const currentMarginTop = parseFloat(getComputedStyle(border).marginTop);
-
-  movingText.style.marginLeft = currentMarginLeft + Math.random() * 5  + 'px';
-  movingText.style.marginTop = currentMarginTop + Math.random() * 5  + 'px';
-
-  requestAnimationFrame(animate);
-}
-     document.addEventListener('mousedown', (event) => {
-      const x = event.clientX;
-      const y = event.clientY;
-
-      border.style.left = x + 'px';
-      border.style.top = y + 'px';
-    });
-    var locked, lockedX, lockedY;
-movingText.addEventListener('mouseover', function (){
-    locked = true;
-    lockedX = window.scrollX;
-    lockedY = window.scrollY;
-}, false);
-movingText.addEventListener('mouseout', function (){
-    locked = false;
-}, false);
-
-window.addEventListener('scroll', function (e){
-    if(locked === true){
-        window.scrollTo(lockedX, lockedY);
-        e.preventDefault();
-    }
-}, false);
-  </script>
+    <header>
+        <h1>Karandeep's Portfolio</h1>
+        <p>Dynamically rendering README.md</p>
+    </header>
+    <div id="content">
+        <h2>Loading...</h2>
+    </div>
+    <footer>
+        <p>© 2024 Karandeep</p>
+    </footer>
+    <script>
+        // Fetch README.md and render it
+        fetch('README.md')
+            .then(response => response.text())
+            .then(text => {
+                const converter = new showdown.Converter(); // Converts markdown to HTML
+                const html = converter.makeHtml(text);
+                document.getElementById('content').innerHTML = html;
+            })
+            .catch(err => {
+                console.error('Error fetching README.md:', err);
+                document.getElementById('content').innerHTML = '<p>Failed to load content. Please try again later.</p>';
+            });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
 </body>
 </html>
