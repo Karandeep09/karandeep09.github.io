@@ -56,7 +56,7 @@
     </footer>
     <script>
         // Fetch README.md and render it
-        fetch('README.md')
+        fetch('https://raw.githubusercontent.com/Karandeep09/karandeep09.github.io/refs/heads/main/README.md')
             .then(response => response.text())
             .then(text => {
                 const converter = new showdown.Converter(); // Converts markdown to HTML
